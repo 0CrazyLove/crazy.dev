@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { FaGithub } from 'react-icons/fa';
 
 interface ExperienceItem {
   id: number;
@@ -64,9 +65,21 @@ export default function Experience() {
             {/* Timeline Dot */}
             <div className="absolute w-4 h-4 rounded-full bg-dark border-2 border-muted -left-2.25 top-1 group-hover:bg-muted transition-colors duration-300" />
 
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2 gap-2">
-              <h3 className="text-2xl font-semibold text-light">{exp.title}</h3>
-              <span className="text-sm font-medium text-muted bg-card px-3 py-1 rounded-full">{exp.period}</span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-4">
+              <div className="flex items-center gap-3">
+                <h3 className="text-2xl font-semibold text-light">{exp.title}</h3>
+                <a 
+                  href={exp.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted hover:text-light transition-colors"
+                  aria-label="Ver repositorio en GitHub"
+                  title="Ver repositorio en GitHub"
+                >
+                  <FaGithub className="text-2xl" />
+                </a>
+              </div>
+              <span className="text-sm font-medium text-muted bg-card px-3 py-1 rounded-full whitespace-nowrap">{exp.period}</span>
             </div>
 
             {exp.company && (
@@ -81,22 +94,12 @@ export default function Experience() {
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6">
-              <div className="flex flex-wrap gap-2">
-                {exp.tech.map(t => (
-                  <span key={t} className="text-xs font-semibold px-3 py-1 bg-card text-light rounded-md">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <a 
-                href={exp.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm border border-muted text-light hover:bg-card hover:border-light px-4 py-2 rounded-lg font-medium transition-colors inline-block text-center sm:text-left"
-              >
-                Code_ GitHub
-              </a>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {exp.tech.map(t => (
+                <span key={t} className="text-xs font-semibold px-3 py-1 bg-card text-light rounded-md">
+                  {t}
+                </span>
+              ))}
             </div>
           </motion.div>
         ))}
