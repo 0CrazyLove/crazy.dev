@@ -36,7 +36,7 @@ const experiences: ExperienceItem[] = [
       "Integrated a hybrid authentication system combining JWT with Refresh Token Rotation and Google OAuth 2.0, enforcing strict identity access policies.",
       "Containerized the full infrastructure using Docker with multi-stage builds and Docker Compose, ensuring consistent deployments across all services."
     ],
-    tech: ["C#", ".NET 9", "Astro", "React 19", "Docker", "JWT", "Tailwind CSS"],
+    tech: ["C#", ".NET 9", "Astro", "React 19", "Docker", "PostgreSQL", "Tailwind CSS"],
     github: "https://github.com/0CrazyLove/ServiceHub"
   }
 ];
