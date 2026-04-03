@@ -62,7 +62,7 @@ export default function Experience() {
             className="group relative pl-8 border-l-2 border-card hover:border-muted transition-colors duration-300"
           >
             {/* Timeline Dot */}
-            <div className="absolute w-4 h-4 rounded-full bg-dark border-2 border-muted left-[-9px] top-1 group-hover:bg-muted transition-colors duration-300" />
+            <div className="absolute w-4 h-4 rounded-full bg-dark border-2 border-muted -left-2.25 top-1 group-hover:bg-muted transition-colors duration-300" />
 
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2 gap-2">
               <h3 className="text-2xl font-semibold text-light">{exp.title}</h3>
