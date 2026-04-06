@@ -20,12 +20,13 @@ export default function Hero() {
           Hi, I'm
         </motion.h2>
         <motion.h1
-          className="text-5xl sm:text-7xl font-extrabold tracking-tight text-light"
+          className="text-5xl sm:text-7xl font-extrabold tracking-tight text-light flex items-center gap-2"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
         >
           Crazy
+          <img src="/crazy.dev/heart.svg" alt="heart" className="w-[0.85em] h-[0.85em]" />
         </motion.h1>
         <motion.h3
           className="text-2xl sm:text-4xl font-semibold text-muted"
