@@ -1,14 +1,25 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
-import { 
-  FaGithub, FaCubes, FaSitemap, 
-  FaExchangeAlt, FaCheckDouble, FaDatabase, FaShieldAlt 
+import {
+  FaGithub, FaCubes, FaSitemap,
+  FaExchangeAlt, FaCheckDouble, FaDatabase, FaShieldAlt
 } from 'react-icons/fa';
-import { 
-  SiDotnet, SiPostgresql, SiDocker, 
-  SiAstro, SiReact, SiTailwindcss 
+import {
+  SiDotnet, SiPostgresql, SiDocker,
+  SiAstro, SiReact, SiTailwindcss
 } from 'react-icons/si';
 import { TbBrandCSharp } from 'react-icons/tb';
+
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 const techIconMap: Record<string, any> = {
   "C#": TbBrandCSharp,
@@ -67,12 +78,13 @@ const experiences: ExperienceItem[] = [
   }
 ];
 
-function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) {
+function ExperienceCard({ exp, index, isMobile }: { exp: ExperienceItem; index: number; isMobile: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseY = useMotionValue(4);
   const smoothY = useSpring(mouseY, { stiffness: 98, damping: 40 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // On mobile: no mouse tracking, static dot position
+  const handleMouseMove = isMobile ? undefined : (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     let yPos = e.clientY - rect.top - 8;
@@ -80,9 +92,66 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
     mouseY.set(yPos);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = isMobile ? undefined : () => {
     mouseY.set(4);
   };
+
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={cardRef}
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "0px" }}
+        transition={{ duration: 0.4 }}
+        className="relative pl-8 border-l-2 border-card"
+      >
+        {/* Static timeline dot on mobile */}
+        <div className="absolute w-4 h-4 rounded-full bg-dark border-2 border-muted -left-2.5 top-1" />
+
+        <div className="flex flex-col mb-2 gap-2">
+          <div className="flex items-center gap-3">
+            <h3 className="text-2xl font-semibold text-light">{exp.title}</h3>
+            <a
+              href={exp.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted"
+              aria-label="Ver repositorio en GitHub"
+              title="Ver repositorio en GitHub"
+            >
+              <FaGithub className="text-2xl" />
+            </a>
+          </div>
+          <span className="text-sm font-medium text-muted bg-card px-3 py-1 rounded-full whitespace-nowrap w-fit">{exp.period}</span>
+        </div>
+
+        {exp.company && (
+          <h4 className="text-xl text-muted font-medium mb-4">{exp.company}</h4>
+        )}
+
+        <p className="text-lg text-light/80 mb-4">{exp.description}</p>
+
+        <ul className="list-disc list-outside ml-5 space-y-2 text-muted mb-6">
+          {exp.features.map((feature, i) => (
+            <li key={i} className="pl-1 leading-relaxed">{feature}</li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-2 mt-6">
+          {exp.tech.map(t => {
+            const Icon = techIconMap[t];
+            return (
+              <span key={t} className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md bg-card/10 text-muted/90 border border-card/30 cursor-default">
+                {Icon && <Icon className="w-3.5 h-3.5" />}
+                {t}
+              </span>
+            );
+          })}
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -146,19 +215,21 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
 }
 
 export default function Experience() {
+  const isMobile = useIsMobile();
+
   return (
     <motion.section
       className="py-12 border-t border-card/50"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7 }}
+      viewport={{ once: true, margin: "0px" }}
+      transition={{ duration: 0.5 }}
     >
       <h2 className="text-3xl font-bold text-light mb-10">Projects</h2>
 
       <div className="space-y-12">
         {experiences.map((exp, index) => (
-          <ExperienceCard key={exp.id} exp={exp} index={index} />
+          <ExperienceCard key={exp.id} exp={exp} index={index} isMobile={isMobile} />
         ))}
       </div>
     </motion.section>

@@ -69,15 +69,16 @@ body {
   @apply bg-dark text-light antialiased selection:bg-muted selection:text-dark;
 }
 
-/* Dot grid — ultra-subtle texture layer (too complex for inline Tailwind classes) */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, var(--color-muted) 0.8px, transparent 0.8px);
-  background-size: 32px 32px;
-  background-position: center center;
-  opacity: 0.035;
-  pointer-events: none;
-  z-index: 0;
+@media (min-width: 640px) {
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--color-muted) 0.8px, transparent 0.8px);
+    background-size: 32px 32px;
+    background-position: center center;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 0;
+  }
 }
