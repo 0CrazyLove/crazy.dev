@@ -4,8 +4,6 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://0crazylove.github.io',
-  base: '/crazy.dev',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
