@@ -26,7 +26,7 @@ export default function Hero() {
           transition={{ delay: 0.4 }}
         >
           Crazy
-          <img src="/crazy.dev/heart.svg" alt="heart" className="w-[0.85em] h-[0.85em]" />
+          <img src="/heart.svg" alt="heart" className="w-[0.85em] h-[0.85em]" />
         </motion.h1>
         <motion.h2
           className="text-2xl sm:text-4xl font-semibold text-muted"
