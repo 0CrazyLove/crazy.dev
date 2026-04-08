@@ -11,14 +11,14 @@ export default function Hero() {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="space-y-4">
-        <motion.h2
+        <motion.p
           className="text-muted text-xl font-medium tracking-wide"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
           Hi, I'm
-        </motion.h2>
+        </motion.p>
         <motion.h1
           className="text-5xl sm:text-7xl font-extrabold tracking-tight text-light flex items-center gap-2"
           initial={{ opacity: 0, x: -20 }}
@@ -28,14 +28,14 @@ export default function Hero() {
           Crazy
           <img src="/crazy.dev/heart.svg" alt="heart" className="w-[0.85em] h-[0.85em]" />
         </motion.h1>
-        <motion.h3
+        <motion.h2
           className="text-2xl sm:text-4xl font-semibold text-muted"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
           Backend Web Developer
-        </motion.h3>
+        </motion.h2>
       </div>
 
       <motion.div
