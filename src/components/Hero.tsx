@@ -54,7 +54,7 @@ export default function Hero() {
           GitHub
         </a>
         <a
-          href="mailto:0crazy.dev@gmail.com"
+          href="mailto:axelvasquez582@gmail.com"
           className="flex items-center gap-2 px-6 py-3 border border-muted text-light font-semibold rounded-lg hover:bg-card hover:border-light transition-all"
         >
           <FiMail className="text-2xl" />
