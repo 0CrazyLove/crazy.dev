@@ -61,7 +61,7 @@ export default function Hero() {
           Contact Me
         </a>
         <a
-          href="https://www.linkedin.com/in/crazydev"
+          href="https://www.linkedin.com/in/axel-vasquez"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 px-6 py-3 border border-muted text-light font-semibold rounded-lg hover:bg-card hover:border-light transition-all"
